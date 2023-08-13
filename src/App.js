@@ -1,56 +1,33 @@
-// import React from 'react'
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import './App.css';
-// import Create from './components/Create';
-// import Edit from './components/Edit';
-// import Read from './components/Read';
-// function App() {
-//   return (
-//     <div className="App">
-//       <Router>
-//         <Routes>
-//           <Route path='/'
-//             element={<Read />} />
-//           <Route path='/create'
-//             element={<Create />} />
-//           <Route path='/edit'
-//             element={<Edit />} />
-//         </Routes>
-//       </Router>
-//     </div>
-//   );
-// }
-
 import React, { useState, useEffect } from 'react'
 import { db } from "./firebase-config"
 import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore"
 import './App.css';
 
 
+
+
 function App() {
+  const productsCollection = collection(db, "products");
+  const [products, setProduct] = useState([]);
   const [newName, setNewName] = useState("");
   const [newType, setNewType] = useState("");
   const [newPrice, setNewPrice] = useState(0);
   const [updatedPrice, setUpdatedPrice] = useState(0);
-
-  const [products, setProduct] = useState([]);
-  const productsCollection = collection(db, "products");
 
   const updateProduct = async (id) => {
     const productDoc = doc(db, "products", id);
     const newField = updatedPrice
     await updateDoc(productDoc, { price: newField })
   };
+
   const deleteProduct = async (id) => {
     const productDoc = doc(db, "products", id);
     await deleteDoc(productDoc)
   };
+
   const createProduct = async () => {
-
     await addDoc(productsCollection, { name: newName, type: newType, price: Number(newPrice) });
-
   };
-
 
   useEffect(() => {
     const getProducts = async () => {
@@ -59,7 +36,6 @@ function App() {
     };
     getProducts();
   }, [])
-
 
   return (
     <div className='App'>
