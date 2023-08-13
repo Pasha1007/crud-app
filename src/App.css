@@ -1,0 +1,35 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .container1 {
+    max-width: 520px;
+  }
+}
+
+@media (min-width: 576px) {
+  .container1 {
+    max-width: 480px;
+  }
+}
+
+
+.btn {
+  margin-bottom: 10px;
+}
+
+.editBtn {
+  background-color: rgb(182, 112, 246);
+  color: white;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.deleteBtn {
+  background-color: rgb(255, 0, 0);
+  color: white;
+
+  border-radius: 0px 5px 5px 0px;
+}
