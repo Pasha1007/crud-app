@@ -10,19 +10,10 @@ function ProductList() {
     const collectioName = "products";
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
+
     const openEditPopup = (product) => {
         setSelectedProduct(product);
         setIsPopupOpen(true);
-    };
-    const updateProduct = async (id, newPrice) => {
-        const productDoc = doc(db, collectioName, id);
-        await updateDoc(productDoc, { price: newPrice });
-        await getProducts();
-    };
-
-    const deleteProduct = async (id) => {
-        const productDoc = doc(db, collectioName, id);
-        await deleteDoc(productDoc)
     };
     const closeEditPopup = () => {
         setIsPopupOpen(false);
@@ -35,7 +26,17 @@ function ProductList() {
     useEffect(() => {
         getProducts();
     }, [])
+    const updateProduct = async (id, newPrice) => {
+        const productDoc = doc(db, collectioName, id);
+        await updateDoc(productDoc, { price: newPrice });
+        await getProducts();
+    };
 
+    const deleteProduct = async (id) => {
+        const productDoc = doc(db, collectioName, id);
+        await deleteDoc(productDoc)
+        alert("Product deleted!")
+    };
 
 
     return (

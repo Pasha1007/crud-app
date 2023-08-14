@@ -26,6 +26,8 @@ function CreateForm() {
         }
         await addDoc(productsCollection, { name: formData.newName, type: formData.newType, price: Number(formData.newPrice) });
         setFormData(initialFormData);
+        alert("New product added!!")
+
     };
     return (
         <div className="row g-2">
